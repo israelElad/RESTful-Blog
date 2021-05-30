@@ -1,0 +1,25 @@
+<%- include("partials/header") %>
+
+<div class="ui main text container segment">
+    <div class="ui huge header"><%= blog.title %></div>
+    <div class="ui top attached">
+        <div class="item">
+            <img class="ui centered rounded image" src="<%= blog.image %>" alt="blog's image">
+            <div class="content">
+                <span><%= blog.created.toDateString() %></span>
+            </div>
+            <div class="description">
+                <!--BEWARE: User can insert JS code using script tags in html, which will be rendered(thanks to the "-")-->
+                <p><%- blog.body %></p>
+            </div>
+            <a class="ui orange basic button" href="/blogs/<%= blog._id %>/edit">Edit</a>
+            <!--Sending DELETE request: The HTML form method should be set to "POST", and the value of the "_method" query string to "DELETE".
+            Then the subsequent method="POST" is overridden to be a true DELETE request due to "method-override" package.-->
+            <form id="deleteButton" action="/blogs/<%= blog._id %>?_method=delete" method="post">
+                <button class="ui red basic button">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include("partials/footer") %>

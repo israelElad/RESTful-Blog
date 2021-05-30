@@ -1,0 +1,28 @@
+<%- include("partials/header") %>
+
+<div class="ui main text container segment">
+    <div class="ui huge header">Edit <%= blog.title %></div>
+    <!--Sending PUT request: The HTML form method should be set to "POST", and the value of the "_method" query string to "PUT".
+    Then the subsequent method="POST" is overridden to be a true PUT request due to "method-override" package.-->
+    <form class="ui form" action="/blogs/<%= blog._id %>?_method=put" method="post">
+        <!-- What "blog[title]" does, is instead of making the value for title available directly from req.body.title
+        it will put it inside of an object called "blog", like so: req.body.blog.title. Now all of the values from the
+        inputs in the form get added into one object (req.body.blog) and you can easily input that data into the
+        database simply by passing in req.body.blog to Blog.create()-->
+        <div class="field">
+            <label>Title</label>
+            <input type="text" name="blog[title]" value="<%= blog.title %>">
+        </div>
+        <div class="field">
+            <label>Image</label>
+            <input type="text" name="blog[image]" value="<%= blog.image %>">
+        </div>
+        <div class="field">
+            <label>Blog Content</label>
+            <textarea name="blog[body]" required><%= blog.body %></textarea>
+        </div>
+        <input class="ui big violet basic button" type="submit">
+    </form>
+</div>
+
+<%- include("partials/footer") %>

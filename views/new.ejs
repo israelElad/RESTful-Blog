@@ -1,0 +1,26 @@
+<%- include("partials/header") %>
+
+<div class="ui main text container segment">
+    <div class="ui huge header">New Blog</div>
+    <form class="ui form" action="/blogs" method="post">
+        <!-- What "blog[title]" does, is instead of making the value for title available directly from req.body.title
+        it will put it inside of an object called "blog", like so: req.body.blog.title. Now all of the values from the
+        inputs in the form get added into one object (req.body.blog) and you can easily input that data into the
+        database simply by passing in req.body.blog to Blog.create()-->
+        <div class="field">
+            <label>Title</label>
+            <input type="text" name="blog[title]" placeholder="title">
+        </div>
+        <div class="field">
+            <label>Image</label>
+            <input type="text" name="blog[image]" placeholder="image">
+        </div>
+        <div class="field">
+            <label>Blog Content</label>
+            <textarea name="blog[body]" placeholder="blog post goes here" required></textarea>
+        </div>
+        <input class="ui big violet basic button" type="submit">
+    </form>
+</div>
+
+<%- include("partials/footer") %>
